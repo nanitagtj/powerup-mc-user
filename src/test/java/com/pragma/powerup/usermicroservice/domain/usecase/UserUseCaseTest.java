@@ -33,7 +33,7 @@ class UserUseCaseTest {
     }
 
     @Test
-    void saveOwner() {
+    void createOwner() {
         User user = new User();
         user.setId(1L);
         user.setName("John");
@@ -44,7 +44,7 @@ class UserUseCaseTest {
         user.setPassword("mypassword");
         user.setIdRole(new Role(1L));
         user.setBirthDate(LocalDate.of(1990, 5, 20));
-        userUseCase.saveOwner(user);
-        verify(userPersistencePort, times(1)).saveOwner(user);
+        userUseCase.createOwner(user);
+        verify(userPersistencePort, times(1)).createOwner(user);
     }
 }

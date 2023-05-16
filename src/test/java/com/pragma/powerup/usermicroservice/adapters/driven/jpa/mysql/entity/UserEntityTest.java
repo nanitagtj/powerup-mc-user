@@ -3,6 +3,7 @@ package com.pragma.powerup.usermicroservice.adapters.driven.jpa.mysql.entity;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -52,7 +53,8 @@ class UserEntityTest {
         String phone = "123456789";
         String dniNumber = "123456789";
         String password = "password";
-        LocalDate birthDate = LocalDate.of(1990, 1, 1);
+        Optional<LocalDate> birthDate = Optional.of(LocalDate.of(1990, 1, 1));
+
         RoleEntity role = mock(RoleEntity.class);
 
         UserEntity userEntity = new UserEntity(id, name, surname, mail, phone, dniNumber, password, role, birthDate);

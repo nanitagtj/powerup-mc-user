@@ -16,16 +16,16 @@ import static org.mockito.Mockito.*;
 class UserRestControllerTest {
 
     @Test
-    public void saveOwner_WhenValidUserRequestDto_ReturnsCreatedResponse() {
+    public void createOwner_WhenValidUserRequestDto_ReturnsCreatedResponse() {
         UserRequestDto userRequestDto = new UserRequestDto();
         IUserHandler userHandlerMock = Mockito.mock(IUserHandler.class);
         UserRestController userRestController = new UserRestController(userHandlerMock);
 
-        ResponseEntity<Map<String, String>> response = userRestController.saveOwner(userRequestDto);
+        ResponseEntity<Map<String, String>> response = userRestController.createOwner(userRequestDto);
 
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
         assertEquals(Constants.USER_CREATED_MESSAGE, response.getBody().get(Constants.RESPONSE_MESSAGE_KEY));
-        verify(userHandlerMock, times(1)).saveOwner(userRequestDto);
+        verify(userHandlerMock, times(1)).createOwner(userRequestDto);
     }
 
 }

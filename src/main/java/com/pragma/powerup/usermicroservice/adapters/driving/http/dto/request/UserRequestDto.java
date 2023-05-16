@@ -30,10 +30,12 @@ public class UserRequestDto {
     @NotBlank
     private String surname;
     @NotNull
-    private Long idRole;
+    private Long idRol;
+    @NotNull
     private LocalDate birthDate;
 
     public UserRequestDto() {
 
     }
+
 }

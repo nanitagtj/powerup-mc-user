@@ -7,6 +7,8 @@ import com.pragma.powerup.usermicroservice.adapters.driven.jpa.mysql.mappers.IRo
 import com.pragma.powerup.usermicroservice.domain.model.Role;
 import com.pragma.powerup.usermicroservice.domain.spi.IRolePersistencePort;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -14,12 +16,20 @@ import java.util.List;
 public class RoleMysqlAdapter implements IRolePersistencePort {
     private final IRoleRepository roleRepository;
     private final IRoleEntityMapper roleEntityMapper;
+
     @Override
-    public List<Role> getAllRoles() {
-        List<RoleEntity> roleEntityList = roleRepository.findAll();
-        if (roleEntityList.isEmpty()) {
+    public Page<Role> getAllRoles(Pageable pageable) {
+        Page<RoleEntity> roleEntityPage = roleRepository.findAll(pageable);
+        if (roleEntityPage.isEmpty()) {
             throw new NoDataFoundException();
         }
-        return roleEntityMapper.toRoleList(roleEntityList);
+        return roleEntityMapper.toRolePage(roleEntityPage);
+    }
+
+    @Override
+    public Role getRoleById(Long id) {
+        RoleEntity roleEntity = roleRepository.findById(id)
+                .orElseThrow(() -> new NoDataFoundException());
+        return roleEntityMapper.roleEntityToRole(roleEntity);
     }
 }

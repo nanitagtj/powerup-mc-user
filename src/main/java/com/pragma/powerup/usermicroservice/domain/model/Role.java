@@ -14,12 +14,6 @@ public class Role {
         this.description = description;
     }
 
-    public Role(long l, String roleUser) {
-    }
-
-    public Role(long l) {
-    }
-
     public Long getId() {
         return id;
     }

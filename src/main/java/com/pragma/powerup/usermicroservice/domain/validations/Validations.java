@@ -1,9 +1,10 @@
 package com.pragma.powerup.usermicroservice.domain.validations;
 
 import com.pragma.powerup.usermicroservice.adapters.driving.http.exceptions.BadRequestException;
-import com.pragma.powerup.usermicroservice.domain.model.User;
 
 import java.time.LocalDate;
+import java.time.Period;
+import java.util.Optional;
 
 public class Validations {
 
@@ -13,11 +14,15 @@ public class Validations {
         }
     }
     public static void validateAge(LocalDate birthDate) {
+        if (birthDate == null) {
+            throw new BadRequestException("Birth date is required");
+        }
+
         LocalDate currentDate = LocalDate.now();
-        int age = currentDate.getYear() - birthDate.getYear();
+        int age = Period.between(birthDate, currentDate).getYears();
+
         if (age < 18) {
             throw new BadRequestException("User must be at least 18 years old");
         }
     }
-
 }

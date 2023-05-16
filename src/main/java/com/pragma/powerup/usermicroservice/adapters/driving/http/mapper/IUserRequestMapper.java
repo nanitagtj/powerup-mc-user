@@ -9,20 +9,21 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.mapstruct.ReportingPolicy;
 
+import static com.pragma.powerup.usermicroservice.configuration.Constants.OWNER_ROLE_ID;
+
 @Mapper(componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.IGNORE,
         unmappedSourcePolicy = ReportingPolicy.IGNORE)
 public interface IUserRequestMapper {
-
-    @Named("mapToRole")
-    default Role mapToRole(Long idRole) {
+    @Mapping(target = "role", source = "idRol", qualifiedByName = "mapRole")
+    User toDomain(UserRequestDto userRequestDto);
+    @Named("mapRole")
+    default Role mapRole(Long idRol) {
         Role role = new Role();
-        role.setId(idRole);
+        role.setId(idRol);
         return role;
     }
-    @Mapping(source = "userRequestDto.idRole", target = "idRole", qualifiedByName = "mapToRole")
-    User toUser(UserRequestDto userRequestDto);
 
-
+    UserRequestDto toDto(User user);
 
 }

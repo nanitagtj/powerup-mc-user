@@ -18,8 +18,8 @@ class IUserPersistencePortTest {
     void saveOwner_ValidUser_CallsRepositorySave() {
         User user = new User();
         IUserPersistencePort userPersistencePort = mock(IUserPersistencePort.class);
-        userPersistencePort.saveOwner(user);
-        verify(userPersistencePort, times(1)).saveOwner(user);
+        userPersistencePort.createOwner(user);
+        verify(userPersistencePort, times(1)).createOwner(user);
     }
 
     @Test
@@ -27,8 +27,8 @@ class IUserPersistencePortTest {
         User user = new User();
         IUserPersistencePort userPersistencePort = mock(IUserPersistencePort.class);
         ArgumentCaptor<User> userCaptor = ArgumentCaptor.forClass(User.class);
-        userPersistencePort.saveOwner(user);
-        verify(userPersistencePort, times(1)).saveOwner(userCaptor.capture());
+        userPersistencePort.createOwner(user);
+        verify(userPersistencePort, times(1)).createOwner(userCaptor.capture());
         User capturedUser = userCaptor.getValue();
         assertEquals(user, capturedUser);
     }

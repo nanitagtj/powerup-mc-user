@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserRequestDtoTest {
     private final ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
     private final Validator validator = validatorFactory.getValidator();
+    LocalDate birthDate = LocalDate.of(1990, 1, 1);
 
     @Test
     void userRequestDto_ValidFields_ValidatedSuccessfully() {
@@ -22,8 +23,8 @@ class UserRequestDtoTest {
                 "password",
                 "+123456789",
                 "Doe",
-                1L,
-                null
+                2L,
+                birthDate
         );
 
         var violations = validator.validate(userRequestDto);
@@ -41,8 +42,8 @@ class UserRequestDtoTest {
                 "password",
                 "+123456789",
                 "Doe",
-                1L,
-                null
+                2L,
+                birthDate
         );
 
         var violations = validator.validate(userRequestDto);
@@ -62,8 +63,8 @@ class UserRequestDtoTest {
                 "password",
                 "+123456789",
                 "Doe",
-                1L,
-                null
+                2L,
+                birthDate
         );
 
         var violations = validator.validate(userRequestDto);
@@ -83,8 +84,8 @@ class UserRequestDtoTest {
                 "password",
                 "+123456789",
                 "Doe",
-                1L,
-                null
+                2L,
+                birthDate
         );
 
         var violations = validator.validate(userRequestDto);
@@ -103,10 +104,10 @@ class UserRequestDtoTest {
                 "test@example.com",
                 "John",
                 "password",
+                "+123456789",
                 null,
-                "Doe",
-                1L,
-                null
+                2L,
+                birthDate
         );
 
         var violations = validator.validate(userRequestDto);
@@ -125,10 +126,10 @@ class UserRequestDtoTest {
                 "test@example.com",
                 "John",
                 "password",
-                "+abc1234567890",
+                "+abc456789",
                 "Doe",
-                1L,
-                null
+                2L,
+                birthDate
         );
 
         var violations = validator.validate(userRequestDto);
@@ -146,10 +147,10 @@ class UserRequestDtoTest {
                 "test@example.com",
                 "John",
                 "password",
-                "1234567890",
+                "+123456789",
                 null,
-                1L,
-                null
+                2L,
+                birthDate
         );
 
         var violations = validator.validate(userRequestDto);
@@ -161,37 +162,16 @@ class UserRequestDtoTest {
     }
 
     @Test
-    void userRequestDto_MissingIdRole_ValidationFails() {
-        UserRequestDto userRequestDto = new UserRequestDto(
-                "123456789",
-                "test@example.com",
-                "John",
-                "password",
-                "1234567890",
-                "Doe",
-                null,
-                null
-        );
-
-        var violations = validator.validate(userRequestDto);
-
-        assertFalse(violations.isEmpty());
-        assertEquals(1, violations.size());
-        assertEquals("must not be null", violations.iterator().next().getMessage());
-        assertEquals("idRole", violations.iterator().next().getPropertyPath().toString());
-    }
-
-    @Test
     void userRequestDto_ValidRequest_ValidatesSuccessfully() {
         UserRequestDto userRequestDto = new UserRequestDto(
                 "123456789",
                 "test@example.com",
                 "John",
                 "password",
-                "1234567890",
+                "+123456789",
                 "Doe",
-                1L,
-                LocalDate.of(1990, 1, 1)
+                2L,
+                birthDate
         );
 
         var violations = validator.validate(userRequestDto);

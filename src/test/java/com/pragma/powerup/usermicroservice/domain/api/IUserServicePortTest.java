@@ -7,14 +7,13 @@ import org.mockito.Mockito;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 class IUserServicePortTest {
 
     @Test
-    void saveOwner() {
+    void createOwner() {
         IUserServicePort userServicePort = Mockito.mock(IUserServicePort.class);
         User user = new User();
         user.setId(1L);
@@ -29,8 +28,8 @@ class IUserServicePortTest {
         role.setName("ROLE_ADMIN");
         user.setIdRole(role);
         user.setBirthDate(LocalDate.of(2000, 1, 1));
-        userServicePort.saveOwner(user);
+        userServicePort.createOwner(user);
 
-        verify(userServicePort, times(1)).saveOwner(user);
+        verify(userServicePort, times(1)).createOwner(user);
     }
 }

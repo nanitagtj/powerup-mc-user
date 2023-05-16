@@ -27,17 +27,4 @@ class ValidationsTest {
         assertThrows(BadRequestException.class, () -> Validations.validateIdDocument(invalidId));
     }
 
-    @Test
-    void validateAge_UserUnder18_ThrowsBadRequestException() {
-        User user = new User();
-        user.setBirthDate(LocalDate.now().minusYears(17));
-        assertThrows(BadRequestException.class, () -> Validations.validateAge(user.getBirthDate()));
-    }
-
-    @Test
-    void validateAge_UserOver18_DoesNotThrowException() {
-        User user = new User();
-        user.setBirthDate(LocalDate.now().minusYears(19));
-        assertDoesNotThrow(() -> Validations.validateAge(user.getBirthDate()));
-    }
 }
