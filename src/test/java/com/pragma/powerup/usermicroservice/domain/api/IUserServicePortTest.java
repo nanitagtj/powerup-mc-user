@@ -26,7 +26,7 @@ class IUserServicePortTest {
         Role role = new Role();
         role.setId(1L);
         role.setName("ROLE_ADMIN");
-        user.setIdRole(role);
+        user.setRole(role);
         user.setBirthDate(LocalDate.of(2000, 1, 1));
         userServicePort.createOwner(user);
 

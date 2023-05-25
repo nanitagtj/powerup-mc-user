@@ -15,14 +15,7 @@ import static com.pragma.powerup.usermicroservice.configuration.Constants.OWNER_
         unmappedTargetPolicy = ReportingPolicy.IGNORE,
         unmappedSourcePolicy = ReportingPolicy.IGNORE)
 public interface IUserRequestMapper {
-    @Mapping(target = "role", source = "idRol", qualifiedByName = "mapRole")
     User toDomain(UserRequestDto userRequestDto);
-    @Named("mapRole")
-    default Role mapRole(Long idRol) {
-        Role role = new Role();
-        role.setId(idRol);
-        return role;
-    }
 
     UserRequestDto toDto(User user);
 

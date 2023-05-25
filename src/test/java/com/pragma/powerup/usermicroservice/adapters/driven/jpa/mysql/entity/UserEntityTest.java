@@ -53,7 +53,7 @@ class UserEntityTest {
         String phone = "123456789";
         String dniNumber = "123456789";
         String password = "password";
-        Optional<LocalDate> birthDate = Optional.of(LocalDate.of(1990, 1, 1));
+        LocalDate birthDate = (LocalDate.of(1990, 1, 1));
 
         RoleEntity role = mock(RoleEntity.class);
 

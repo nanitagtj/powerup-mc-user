@@ -6,11 +6,13 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 public class UserRequestDto {
@@ -24,18 +26,14 @@ public class UserRequestDto {
     private String name;
     @NotBlank
     private String password;
-    @Pattern(regexp = "^(\\+\\d{1,3})?((\\d{1,3})|\\d{1,3})\\d{3,4}\\d{4}$", message = "Invalid phone number format")
+    @Pattern(regexp = "\\+\\d{1,12}", message = "Invalid phone number format")
     @NotBlank
     private String phone;
     @NotBlank
     private String surname;
     @NotNull
-    private Long idRol;
-    @NotNull
     private LocalDate birthDate;
 
-    public UserRequestDto() {
-
+    public UserRequestDto(String number, String mail, String john, String password, String s, String doe, long l, LocalDate birthDate) {
     }
-
 }

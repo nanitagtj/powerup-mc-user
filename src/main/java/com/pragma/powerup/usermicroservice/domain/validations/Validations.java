@@ -4,7 +4,6 @@ import com.pragma.powerup.usermicroservice.adapters.driving.http.exceptions.BadR
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.Optional;
 
 public class Validations {
 

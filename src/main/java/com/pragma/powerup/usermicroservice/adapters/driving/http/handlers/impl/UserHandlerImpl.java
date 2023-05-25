@@ -12,7 +12,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-
 @Service
 @RequiredArgsConstructor
 public class UserHandlerImpl implements IUserHandler {
@@ -22,26 +21,34 @@ public class UserHandlerImpl implements IUserHandler {
 
     @Override
     public void createUser(UserRequestDto userRequestDto) {
-        userServicePort.createUser(userRequestMapper.toDomain(userRequestDto));
+        User user = userRequestMapper.toDomain(userRequestDto);
+        userServicePort.createUser(user);
     }
-
     @Override
     public void createOwner(UserRequestDto userRequestDto) {
-        userServicePort.createOwner(userRequestMapper.toDomain(userRequestDto));
+        User owner = userRequestMapper.toDomain(userRequestDto);
+        userServicePort.createOwner(owner);
     }
-
+    @Override
+    public void createEmployee(UserRequestDto userRequestDto) {
+        User employee = userRequestMapper.toDomain(userRequestDto);
+        userServicePort.createEmployee(employee);
+    }
+    @Override
+    public void createClient(UserRequestDto userRequestDto) {
+        User client = userRequestMapper.toDomain(userRequestDto);
+        userServicePort.createClient(client);
+    }
     @Override
     public UserResponseDto getUserById(Long id) {
         User user = userServicePort.getUserById(id);
         return userResponseMapper.toResponse(user);
     }
-
     @Override
     public Page<UserResponseDto> getAllUsers(Pageable pageable) {
         Page<User> users = userServicePort.getAllUsers(pageable);
         return users.map(userResponseMapper::toResponse);
     }
-
     @Override
     public void deleteUser(Long id) {
         userServicePort.deleteUser(id);

@@ -80,7 +80,8 @@ public class ControllerAdvisor {
     }
 
     @ExceptionHandler(EmptyBirthDateException.class)
-    public ResponseEntity<Map<String, String>> handleEmptyBirthDateException(EmptyBirthDateException emptyBirthDateException) {
+    public ResponseEntity<Map<String, String>> handleEmptyBirthDateException(
+            EmptyBirthDateException emptyBirthDateException) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(Collections.singletonMap(RESPONSE_ERROR_MESSAGE_KEY, EMPTY_BIRTHDAY_DATE_EXCEPTION));
     }

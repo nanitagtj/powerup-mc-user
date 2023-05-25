@@ -1,7 +1,9 @@
 server:
-  port: 8090
+  port: 8080
 
 spring:
+  application:
+    name: users
   datasource:
     url: jdbc:mysql://localhost/powerupUser
     username: root

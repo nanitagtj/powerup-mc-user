@@ -42,7 +42,7 @@ class UserUseCaseTest {
         user.setPhone("1234567890");
         user.setDniNumber("123456789");
         user.setPassword("mypassword");
-        user.setIdRole(new Role(1L));
+        user.setRole(new Role(1L, "ADMIN", "ADMIN"));
         user.setBirthDate(LocalDate.of(1990, 5, 20));
         userUseCase.createOwner(user);
         verify(userPersistencePort, times(1)).createOwner(user);

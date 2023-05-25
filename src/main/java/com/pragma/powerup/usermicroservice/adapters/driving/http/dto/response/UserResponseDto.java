@@ -17,6 +17,8 @@ import java.util.Optional;
 @Setter
 public class UserResponseDto {
     @NotNull
+    private Long id;
+    @NotNull
     private String dniNumber;
     @Email
     @NotNull

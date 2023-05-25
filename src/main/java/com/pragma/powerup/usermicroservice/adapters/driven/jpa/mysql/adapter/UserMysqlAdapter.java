@@ -22,7 +22,44 @@ public class UserMysqlAdapter implements IUserPersistencePort {
     private final PasswordEncoder passwordEncoder;
 
     @Override
+    public void createUser(User user) {
+        if (userRepository.findByDniNumber(user.getDniNumber()).isPresent()) {
+            throw new UserAlreadyExistsException();
+        }
+
+        if (userRepository.existsByMail(user.getMail())){
+            throw new MailAlreadyExistsException();
+        }
+
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(userEntityMapper.toEntity(user));
+    }
+    @Override
     public void createOwner(User user) {
+        if (userRepository.findByDniNumber(user.getDniNumber()).isPresent()) {
+            throw new UserAlreadyExistsException();
+        }
+        if (userRepository.existsByMail(user.getMail())){
+            throw new MailAlreadyExistsException();
+        }
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(userEntityMapper.toEntity(user));
+    }
+    @Override
+    public void createEmployee(User user) {
+        if (userRepository.findByDniNumber(user.getDniNumber()).isPresent()) {
+            throw new UserAlreadyExistsException();
+        }
+
+        if (userRepository.existsByMail(user.getMail())){
+            throw new MailAlreadyExistsException();
+        }
+
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(userEntityMapper.toEntity(user));
+    }
+    @Override
+    public void createClient(User user) {
         if (userRepository.findByDniNumber(user.getDniNumber()).isPresent()) {
             throw new UserAlreadyExistsException();
         }
@@ -42,12 +79,6 @@ public class UserMysqlAdapter implements IUserPersistencePort {
             throw new NoDataFoundException();
         }
         return userEntityMapper.toUserPage(userEntityPage);
-    }
-
-    @Override
-    public void createUser(User user) {
-        UserEntity userEntity = userEntityMapper.toEntity(user);
-        userRepository.save(userEntity);
     }
 
     @Override
